@@ -1,49 +1,187 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-var num = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
-var sym = ["!", "@", "#", "$", "%", "^", "&", "*", "=", "-", "_", "'"];
+var allLetters = "abcdefghijklmnopqrstuvwxyz";
+var allUpperCaseLetters = allLetters.toUpperCase();
+var upperCaseLetters = allUpperCaseLetters.split("");
+var lowerCaseLetters = allLetters.split("");
+var numbers = "0123456789";
+var num = numbers.split("");
+var symbols = "!@#$%^&*=-_,'";
+var sym = symbols.split("");
+
+console.log(upperCaseLetters);
+console.log(lowerCaseLetters);
+console.log(num);
+console.log(sym);
+
+var chooseLength = "";
+
+// This is the generate password function. This first part serves to get the user to decide what they want.
+
+function generatePassword() {
+  var chooseLength = prompt(
+    "Please pick a password length between 8 and 128 characters"
+  );
+
+  while (chooseLength <= 7 || chooseLength >= 129) {
+    alert(
+      "You did not enter a value between 8 and 128 characters. Please try again."
+    );
+    var chooseLength = prompt(
+      "Please pick a password length between 8 and 128 characters"
+    );
+  }
+
+  console.log(chooseLength);
+
+  alert(
+    `Next, you will be asked if you want to include uppercase letters, lowercase letters, numbers, or special characters. You must accept at least one category in order to generate your password.`
+  );
+
+  // User input for characters
+
+  var upperCase = confirm(
+    "Do you want to include uppercase characters? Click OK for Yes and Cancel for No"
+  );
+  var lowerCase = confirm(
+    "Do you want to include lowercase characters? Click OK for Yes and Cancel for No"
+  );
+  var wantNumbers = confirm(
+    "Do you want to include numbers? Click OK for Yes and Cancel for No"
+  );
+  var specialCharacter = confirm(
+    "Do you want to include special characters? Click OK for Yes and Cancel for No"
+  );
+
+  console.log(upperCase);
+  console.log(lowerCase);
+  console.log(wantNumbers);
+  console.log(specialCharacter);
+
+  // Loop if they don't agree to at least one option
+
+  while (
+    upperCase === false &&
+    lowerCase === false &&
+    specialCharacter === false &&
+    wantNumbers === false
+  ) {
+    alert("You must choose at least one parameter");
+    var upperCase = confirm(
+      "Do you want to include uppercase characters? Click OK for Yes and Cancel for No"
+    );
+    var lowerCase = confirm(
+      "Do you want to include lowercase characters? Click OK for Yes and Cancel for No"
+    );
+    var wantNumbers = confirm(
+      "Do you want to include numbers? Click OK for Yes and Cancel for No"
+    );
+    var specialCharacter = confirm(
+      "Do you want to include special characters? Click OK for Yes and Cancel for No"
+    );
+  }
+
+  // Need to set this up so that the random letters are chosen from each array in a loop 
+  // Then the final array is randomly shuffled
+
+  var passwordText = "";
+  var passwordCharSet = "";
+
+  while (
+    upperCase === true &&
+    lowerCase === false &&
+    specialCharacter === false &&
+    wantNumbers === false
+  )for (var i = 0; i < chooseLength; i++) {
+    passwordText +=
+      passwordCharSet[Math.floor(Math.random() * passwordCharSet.length)];
+      console.log(passwordText);
+      return passwordText;
+  }
+ 
+
+  while (
+    upperCase === true &&
+    lowerCase === true &&
+    specialCharacter === false &&
+    wantNumbers === false
+  ){
+    passwordCharSet += upperCaseLetters;
+  }
+  while (
+    upperCase === true &&
+    lowerCase === true &&
+    specialCharacter === true &&
+    wantNumbers === false
+  ){
+    passwordCharSet += upperCaseLetters;
+  }
+  while (
+    upperCase === true &&
+    lowerCase === true &&
+    specialCharacter === true &&
+    wantNumbers === true
+  ){
+    passwordCharSet += upperCaseLetters;
+  }
+  while (
+    upperCase === false &&
+    lowerCase === true &&
+    specialCharacter === false &&
+    wantNumbers === false
+  ){
+    passwordCharSet += upperCaseLetters;
+  }
+  while (
+    upperCase === false &&
+    lowerCase === true &&
+    specialCharacter === true &&
+    wantNumbers === false
+  ){
+    passwordCharSet += upperCaseLetters;
+  }
+  while (
+    upperCase === false &&
+    lowerCase === true &&
+    specialCharacter === true &&
+    wantNumbers === true
+  ){
+    passwordCharSet += upperCaseLetters;
+  }
+  while (
+    upperCase === false &&
+    lowerCase === false &&
+    specialCharacter === true &&
+    wantNumbers === false
+  ){
+    passwordCharSet += upperCaseLetters;
+  }
+  while (
+    upperCase === false &&
+    lowerCase === false &&
+    specialCharacter === true &&
+    wantNumbers === true
+  ){
+    passwordCharSet += upperCaseLetters;
+  }
+  while (
+    upperCase === false &&
+    lowerCase === false &&
+    specialCharacter === false &&
+    wantNumbers === true
+  ){
+    passwordCharSet += upperCaseLetters;
+  }
 
 // Write password to the #password input
-
-}
-
-// Make an array with the user preferences
-function generateArray1 ()
-
-//Make a random password from the array
-function randomPassword() {
-  var length = num1,
-      charset = array1,
-      retVal = "";
-  for (var i = 0, n = charset.length; i < length; ++i) {
-      retVal += charset.charAt(Math.floor(Math.random() * n));
-  }
-  return retVal;
-}
-
-// Password Generator
-function generatePassword(){
+function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword){
-    let a1 = prompt("How many characters do you want to enter? Must be between 8 and 128", "0");
-    var num1 = parseInt(a1);
-  
-    if (num1 > 128 &&& < 8){
-      var yesUpperCase = confirm("Do you want to use uppercase lettesr?")
-      if (yesUpperCase = true){
-        return yesUpperCase)
-}
-    }
+// Add Event Listener to the Generate Button
 
-  }  
-  }
+generateBtn.addEventListener("click", writePassword);
