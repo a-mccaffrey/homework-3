@@ -3,17 +3,17 @@ var generateBtn = document.querySelector("#generate");
 
 var allLetters = "abcdefghijklmnopqrstuvwxyz";
 var allUpperCaseLetters = allLetters.toUpperCase();
-var upperCaseLetters = allUpperCaseLetters.split("");
-var lowerCaseLetters = allLetters.split("");
-var numbers = "0123456789";
-var num = numbers.split("");
-var symbols = "!@#$%^&*=-_,'";
-var sym = symbols.split("");
+// var upperCaseLetters = allUpperCaseLetters.split("");
+// var lowerCaseLetters = allLetters.split("");
+var allNumbers = "0123456789";
+// var num = numbers.split("");
+var allSymbols = "!@#$%^&*=-_,'";
+// var sym = symbols.split("");
 
-console.log(upperCaseLetters);
-console.log(lowerCaseLetters);
-console.log(num);
-console.log(sym);
+// console.log(upperCaseLetters);
+// console.log(lowerCaseLetters);
+// console.log(num);
+// console.log(sym);
 
 var chooseLength = "";
 
@@ -67,7 +67,7 @@ function generatePassword() {
     specialCharacter === false &&
     wantNumbers === false
   ) {
-    alert("You must choose at least one parameter");
+    alert("You must click ok for at least one option");
     var upperCase = confirm(
       "Do you want to include uppercase characters? Click OK for Yes and Cancel for No"
     );
@@ -84,102 +84,36 @@ function generatePassword() {
 
   // Need to set this up so that the random letters are chosen from each array in a loop 
   // Then the final array is randomly shuffled
-
-  var passwordText = "";
-  var passwordCharSet = "";
-
-  while (
-    upperCase === true &&
-    lowerCase === false &&
-    specialCharacter === false &&
-    wantNumbers === false
-  )for (var i = 0; i < chooseLength; i++) {
-    passwordText +=
-      passwordCharSet[Math.floor(Math.random() * passwordCharSet.length)];
-      console.log(passwordText);
-      return passwordText;
-  }
+    var newArray = []
+    if (upperCase) {
+      newArray += allUpperCaseLetters;
+    }
+    if (lowerCase) {
+      newArray += allLetters;
+    }
+    if (wantNumbers) {
+      newArray += allNumbers;
+    }
+    if (specialCharacter) {
+      newArray += allSymbols;
+    }
+    
+    newArray.split("")
+    var randomPassword = "";
+    for (var i = 0; i < chooseLength; i++) {
+      var random = Math.floor(Math.random() * chooseLength);
+      randomPassword += newArray[random];
+    }
+    return randomPassword;
+  };
  
-
-  while (
-    upperCase === true &&
-    lowerCase === true &&
-    specialCharacter === false &&
-    wantNumbers === false
-  ){
-    passwordCharSet += upperCaseLetters;
-  }
-  while (
-    upperCase === true &&
-    lowerCase === true &&
-    specialCharacter === true &&
-    wantNumbers === false
-  ){
-    passwordCharSet += upperCaseLetters;
-  }
-  while (
-    upperCase === true &&
-    lowerCase === true &&
-    specialCharacter === true &&
-    wantNumbers === true
-  ){
-    passwordCharSet += upperCaseLetters;
-  }
-  while (
-    upperCase === false &&
-    lowerCase === true &&
-    specialCharacter === false &&
-    wantNumbers === false
-  ){
-    passwordCharSet += upperCaseLetters;
-  }
-  while (
-    upperCase === false &&
-    lowerCase === true &&
-    specialCharacter === true &&
-    wantNumbers === false
-  ){
-    passwordCharSet += upperCaseLetters;
-  }
-  while (
-    upperCase === false &&
-    lowerCase === true &&
-    specialCharacter === true &&
-    wantNumbers === true
-  ){
-    passwordCharSet += upperCaseLetters;
-  }
-  while (
-    upperCase === false &&
-    lowerCase === false &&
-    specialCharacter === true &&
-    wantNumbers === false
-  ){
-    passwordCharSet += upperCaseLetters;
-  }
-  while (
-    upperCase === false &&
-    lowerCase === false &&
-    specialCharacter === true &&
-    wantNumbers === true
-  ){
-    passwordCharSet += upperCaseLetters;
-  }
-  while (
-    upperCase === false &&
-    lowerCase === false &&
-    specialCharacter === false &&
-    wantNumbers === true
-  ){
-    passwordCharSet += upperCaseLetters;
-  }
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  var randomPassword= document.querySelector("#password");
 
-  passwordText.value = password;
+  randomPassword.value = password;
 }
 
 // Add Event Listener to the Generate Button
