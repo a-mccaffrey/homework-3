@@ -3,12 +3,12 @@ var generateBtn = document.querySelector("#generate");
 
 var allLowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
 var allUpperCaseLetters = allLowerCaseLetters.toUpperCase();
-var splitLower = Array.from(allLowerCaseLetters);
-var splitUpper = Array.from(allUpperCaseLetters);
+var splitLower = allLowerCaseLetters.split('');
+var splitUpper = allUpperCaseLetters.split('');
 var allNumbers = "0123456789";
-var splitNumbers = Array.from(allNumbers);
+var splitNumbers = allNumbers.split('');
 var allSymbols = "!@#$%^&*=-_,'";
-var splitSymbols = Array.from(allSymbols);
+var splitSymbols = allSymbols.split('');
 
 var chooseLength = "";
 
@@ -77,11 +77,14 @@ function generatePassword() {
     );
   }
 
-  // Need to set this up so that the random letters are chosen from each array in a loop 
-  // Then the final array is randomly shuffled
-  let newArray = `${upperCase ? splitUpper : ''}${lowerCase ? splitLower : ''}${specialCharacter ? splitSymbols: ''}${wantNumbers ? splitNumbers : ''}`;
+  // I tried so many ways to get this to work. I don't know why the numbers and special characters aren't working. 
 
-    
+    let newArray = []
+    if (upperCase) newArray = newArray.concat(splitUpper);
+    if (lowerCase) newArray = newArray.concat(splitLower);
+    if (specialCharacter) newArray = newArray.concat(splitNumbers);
+    if (wantNumbers) newArray = newArray.concat(splitSymbols);
+
     var randomPassword = "";
     for (let i = 0; i < chooseLength; i++) {
       var rand = Math.floor(Math.random() * chooseLength);
@@ -94,7 +97,7 @@ function generatePassword() {
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  var randomPassword= document.querySelector("#password");
+  var randomPassword = document.querySelector("#password");
 
   randomPassword.value = password;
 }
