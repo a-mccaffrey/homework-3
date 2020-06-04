@@ -1,19 +1,14 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-var allLetters = "abcdefghijklmnopqrstuvwxyz";
-var allUpperCaseLetters = allLetters.toUpperCase();
-// var upperCaseLetters = allUpperCaseLetters.split("");
-// var lowerCaseLetters = allLetters.split("");
+var allLowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
+var allUpperCaseLetters = allLowerCaseLetters.toUpperCase();
+var splitLower = Array.from(allLowerCaseLetters);
+var splitUpper = Array.from(allUpperCaseLetters);
 var allNumbers = "0123456789";
-// var num = numbers.split("");
+var splitNumbers = Array.from(allNumbers);
 var allSymbols = "!@#$%^&*=-_,'";
-// var sym = symbols.split("");
-
-// console.log(upperCaseLetters);
-// console.log(lowerCaseLetters);
-// console.log(num);
-// console.log(sym);
+var splitSymbols = Array.from(allSymbols);
 
 var chooseLength = "";
 
@@ -84,25 +79,13 @@ function generatePassword() {
 
   // Need to set this up so that the random letters are chosen from each array in a loop 
   // Then the final array is randomly shuffled
-    var newArray = []
-    if (upperCase) {
-      newArray += allUpperCaseLetters;
-    }
-    if (lowerCase) {
-      newArray += allLetters;
-    }
-    if (wantNumbers) {
-      newArray += allNumbers;
-    }
-    if (specialCharacter) {
-      newArray += allSymbols;
-    }
+  let newArray = `${upperCase ? splitUpper : ''}${lowerCase ? splitLower : ''}${specialCharacter ? splitSymbols: ''}${wantNumbers ? splitNumbers : ''}`;
+
     
-    newArray.split("")
     var randomPassword = "";
-    for (var i = 0; i < chooseLength; i++) {
-      var random = Math.floor(Math.random() * chooseLength);
-      randomPassword += newArray[random];
+    for (let i = 0; i < chooseLength; i++) {
+      var rand = Math.floor(Math.random() * chooseLength);
+      randomPassword += newArray[rand];
     }
     return randomPassword;
   };
